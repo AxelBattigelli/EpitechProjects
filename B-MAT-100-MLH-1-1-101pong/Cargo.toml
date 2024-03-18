@@ -1,0 +1,15 @@
+[package]
+name = "maths-101-pong"
+version = "0.1.0"
+edition = "2021"
+publish = false
+default-run = "101pong"
+
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+
+[[bin]]
+name = "101pong"
+path = "src/main.rs"

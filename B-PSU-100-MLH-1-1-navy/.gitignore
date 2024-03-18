@@ -1,0 +1,8 @@
+*.a
+*.o
+a.out
+my_navy
+pos*
+tests
+*.log
+.vscode

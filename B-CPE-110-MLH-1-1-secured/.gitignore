@@ -1,0 +1,12 @@
+*.a
+*.o
+*.txt
+*.java
+*.class
+test.c
+.txt
+secured
+fuck_tests
+a.out
+main.c
+coding*

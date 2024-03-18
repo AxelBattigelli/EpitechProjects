@@ -1,0 +1,10 @@
+*.a
+*.o
+mysh
+vgcore*
+a.out
+tests
+tester.sh
+my_divzero
+testing/
+test.c

@@ -1,0 +1,113 @@
+// use std::process::ExitCode;
+
+// fn main() -> ExitCode {
+//     // number rec value
+//     let n = match std::env::args().nth(1) {
+//         Some(nb) => nb,
+//         None => return ExitCode::from(84),
+//     };
+//     let n = match n.trim().parse::<usize>() {
+//         Ok(tmp) => tmp,
+//         Err(_) => return ExitCode::from(84),
+//     };
+
+//     // arith mean
+//     let m = match std::env::args().nth(2) {
+//         Some(nb) => nb,
+//         None => return ExitCode::from(84),
+//     };
+//     let m = match m.trim().parse::<f64>() {
+//         Ok(tmp) => tmp,
+//         Err(_) => return ExitCode::from(84),
+//     };
+
+//     // add new value
+//     let v = match std::env::args().nth(3) {
+//         Some(nb) => nb,
+//         None => return ExitCode::from(84),
+//     };
+//     let v = match v.trim().parse::<f64>() {
+//         Ok(tmp) => tmp,
+//         Err(_) => return ExitCode::from(84),
+//     };
+
+//     // let somme = (0..n).map(|_| m).sum::<f64>();
+//     // let new = somme + v;
+//     // let div = n + 1;
+//     // let mean = new / (div as f64);
+//     // println!("{}", mean);
+//     // ExitCode::SUCCESS
+
+//     // let square = m * m;
+//     // let somme = square * n as f64;
+//     // let new = somme + (v * v);
+//     // let div = n + 1;
+//     // let mean = (new / (div as f64)).sqrt();
+//     // println!("{}", mean);
+//     // ExitCode::SUCCESS
+
+//     // let inv = m.recip();
+//     // let mul = inv * n as f64;
+//     // let new = mul + v.recip();
+//     // let res = (n + 1) as f64 / new;
+//     // println!("{}", res);
+//     // ExitCode::SUCCESS
+// }
+
+use std::process::ExitCode;
+
+fn main() -> ExitCode {
+    let mut args = std::env::args().skip(1);
+
+    // number rec value
+    let n = match args.next() {
+        Some(nb) => nb,
+        None => return ExitCode::from(84),
+    };
+    let n = match n.trim().parse::<usize>() {
+        Ok(tmp) => tmp,
+        Err(_) => return ExitCode::from(84),
+    };
+
+    // arith mean
+    let a: String = match args.next() {
+        Some(nb) => nb,
+        None => return ExitCode::from(84),
+    };
+    let a = match a.trim().parse::<f64>() {
+        Ok(tmp) => tmp,
+        Err(_) => return ExitCode::from(84),
+    };
+
+    // harm mean
+    let h = match args.next() {
+        Some(nb) => nb,
+        None => return ExitCode::from(84),
+    };
+    let h = match h.trim().parse::<f64>() {
+        Ok(tmp) => tmp,
+        Err(_) => return ExitCode::from(84),
+    };
+
+    // st dev
+    let sd = match args.next() {
+        Some(nb) => nb,
+        None => return ExitCode::from(84),
+    };
+    let sd = match sd.trim().parse::<f64>() {
+        Ok(tmp) => tmp,
+        Err(_) => return ExitCode::from(84),
+    };
+    let a_square = a * a;
+    let sd_square = sd * sd;
+    let rms = (a_square + sd_square).sqrt();
+
+    let square = rms * rms;
+    let somme = square * n as f64;
+    let new = somme + (299042.0 * 299042.0);
+    let n = n + 1;
+    let rms = (new / (n as f64)).sqrt();
+    
+    println!("{}", rms);
+    ExitCode::SUCCESS
+}

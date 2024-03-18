@@ -1,0 +1,6 @@
+./lib/libmy.a:1: MAJOR:C-O1
+./lib/my/libmy.a:1: MAJOR:C-O1
+./my_radar:1: MAJOR:C-O1
+./src/file_manipulation/get_entities_from_file.c:102: MAJOR:C-F4
+./src/file_manipulation/get_entities_from_file.c:103: MAJOR:C-F4
+./src/main.o:1: MAJOR:C-O1

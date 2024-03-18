@@ -1,0 +1,13 @@
+*.c~
+*.a
+*.o
+*.out
+*.log
+vgcore*
+unit-tests
+unit-tests*
+my_sokoban
+maps/
+err
+.vscode
+

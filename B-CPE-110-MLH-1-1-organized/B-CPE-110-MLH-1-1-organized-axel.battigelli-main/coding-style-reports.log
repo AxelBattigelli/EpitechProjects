@@ -1,0 +1,8 @@
+./del.c:14: MINOR:C-F2
+./del.c:21: MAJOR:C-C1
+./del.c:23: MAJOR:C-C1
+./del.c:35: MAJOR:C-F4
+./lib/libmy.a:1: MAJOR:C-O1
+./lib/libshell.a:1: MAJOR:C-O1
+./organized:1: MAJOR:C-O1
+./sort_by_id_or_type.c:34: MINOR:C-L2
