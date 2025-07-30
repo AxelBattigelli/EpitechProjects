@@ -1,0 +1,184 @@
+name: zappy
+
+env:
+  MIRROR_URL: "git@github.com:EpitechPromo2028/B-YEP-400-MLH-4-1-zappy-corentin.bergaentzle.git"
+  EXECUTABLES: "zappy"
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+
+    check_coding_style:
+      runs-on: ubuntu-latest
+      name: "Check the coding style"
+      if: github.repository != 'EpitechPromo2028/B-YEP-400-MLH-4-1-zappy-corentin.bergaentzle'
+      container: ghcr.io/epitech/coding-style-checker:latest
+      steps:
+          - name: Extract all the files with Checkout
+            uses: actions/checkout@v4
+            with:
+              fetch-depth: 0
+          - id: check_coding_style
+            run: |
+              check.sh $(pwd)/SERVER $(pwd)/SERVER
+              ERROR_VAR=$(cat $(pwd)/SERVER/coding-style-reports.log)
+              OIFS=$IFS
+              IFS=$'\n'
+              for ERROR in $ERROR_VAR; do
+                  file1=$(echo "$ERROR" | cut -d ':' -f 1)
+                  file2=$(echo "$ERROR" | cut -d ':' -f 2)
+                  file3=$(echo "$ERROR" | cut -d ':' -f 3)
+                  file4=$(echo "$ERROR" | cut -d ':' -f 4)
+                  echo "::error file=$file1,title=$file3 coding style errors detected::$file4"
+              done
+              IFS=$OIFS
+              if [[ -n $ERROR_VAR ]]
+              then
+                  exit 1
+              else
+                  echo No coding style errors
+              fi
+
+    check_program_compilation:
+      name: "Check if the program can build without error"
+      runs-on: ubuntu-latest
+      if: github.repository != 'EpitechPromo2028/B-YEP-400-MLH-4-1-zappy-corentin.bergaentzle'
+      container: epitechcontent/epitest-docker:latest
+      steps:
+        - name: "Install raylib"
+          run: |
+            sudo apt update
+            sudo apt install git build-essential cmake libgl1-mesa-dev libx11-dev libxcursor-dev libxrandr-dev libxi-dev libasound2-dev libpulse-dev libopenal-dev libudev-dev libdrm-dev
+            git clone https://github.com/raysan5/raylib.git
+            cd raylib
+            mkdir build
+            cd build
+            cmake -DBUILD_SHARED_LIBS=ON ..
+            make -j$(nproc)
+            sudo make install
+            sudo ldconfig 
+
+        - name: "Get files of the repository"
+          uses: actions/checkout@v4
+
+        - name: "Compile the program"
+          run: make
+
+        - name: Is zappy_serv executable ?
+          run: if [ ! -x zappy_server ]; then exit 1; fi
+
+        - name: Is zappy_gui executable ?
+          run: if [ ! -x zappy_gui ]; then exit 1; fi
+
+        - name: Is zappy_ai executable ?
+          run: if [ ! -x zappy_ai ]; then exit 1; fi
+
+        - name: "Clean the repository"
+          run: make clean
+
+    check_program_unit_tests:
+      name: "Check if the program can run the unit tests"
+      needs: check_program_compilation
+      runs-on: ubuntu-latest
+      if: github.repository != 'EpitechPromo2028/B-YEP-400-MLH-4-1-zappy-corentin.bergaentzle'
+      container: epitechcontent/epitest-docker:latest
+      steps:
+        - name: "Get files of the repository"
+          uses: actions/checkout@v4
+
+        - name: "Install raylib"
+          run: |
+            sudo apt update
+            sudo apt install git build-essential cmake libgl1-mesa-dev libx11-dev libxcursor-dev libxrandr-dev libxi-dev libasound2-dev libpulse-dev libopenal-dev libudev-dev libdrm-dev
+            git clone https://github.com/raysan5/raylib.git
+            cd raylib
+            mkdir build
+            cd build
+            cmake -DBUILD_SHARED_LIBS=ON ..
+            make -j$(nproc)
+            sudo make install
+            sudo ldconfig 
+            pip3 install coverage --break-system-packages
+
+        - name: "Compile the unit_tests"
+          run: make tests_run
+
+        - name: "clean the repository"
+          run: make clean
+
+    valgrind:
+      name: "Check valgrind for the project"
+      needs: [check_program_unit_tests, check_coding_style]
+      runs-on: ubuntu-latest
+      container: epitechcontent/epitest-docker:latest
+      steps:
+        - name: "Get files of the repository"
+          uses: actions/checkout@v4
+
+        - name: "Install raylib"
+          run: |
+            sudo apt update
+            sudo apt install git build-essential cmake libgl1-mesa-dev libx11-dev libxcursor-dev libxrandr-dev libxi-dev libasound2-dev libpulse-dev libopenal-dev libudev-dev libdrm-dev
+            git clone https://github.com/raysan5/raylib.git
+            cd raylib
+            mkdir build
+            cd build
+            cmake -DBUILD_SHARED_LIBS=ON ..
+            make -j$(nproc)
+            sudo make install
+            sudo ldconfig 
+            pip3 install coverage --break-system-packages
+
+        - name: "Compile unit tests gui"
+          run: make unit_test_gui
+
+        - name: "Run valgrind"
+          run: valgrind --leak-check=full ./unit_tests_gui
+
+        - name: "Compile unit tests server"
+          run: make unit_test_server
+
+        - name: "Run valgrind"
+          run: valgrind --leak-check=full ./unit_tests_server
+
+        - name: "Run gcovr"
+          run: gcovr --exclude tests --branches --html-details -o coverage.html
+
+        - name: "Run gcovr for codecov"
+          run: gcovr --exclude tests --branches --xml -o coverage.xml
+
+        - name: "Upload to Codecov"
+          uses: codecov/codecov-action@v4
+          with:
+            token: ${{ secrets.CODECOV_TOKEN }}
+            files: coverage.xml
+            flags: unittests
+            name: codecov-coverage
+
+        - uses: actions/upload-artifact@v4
+          with:
+            name: coverage-report
+            path: "*.html"
+
+        - name: "clean the repository"
+          run: make clean
+
+    push_to_mirror:
+      name: "Push the actual repository in the mirror repository"
+      needs: valgrind
+      runs-on: ubuntu-latest
+      if : ${{ github.event_name == 'push' }}
+      steps:
+          - uses: actions/checkout@v4
+            with:
+              fetch-depth: 0
+          - uses: pixta-dev/repository-mirroring-action@v1
+            with:
+              target_repo_url: ${{ env.MIRROR_URL }}
+              ssh_private_key: ${{ secrets.GITSSHKEY }}

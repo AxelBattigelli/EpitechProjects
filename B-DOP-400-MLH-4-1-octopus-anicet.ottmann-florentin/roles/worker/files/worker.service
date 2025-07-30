@@ -1,0 +1,17 @@
+[Unit]
+Description=Worker
+
+[Service]
+User=worker
+WorkingDirectory=/opt/worker/target
+ExecStart=java -jar worker-jar-with-dependencies.jar
+Restart=always
+Environment='REDIS_HOST={{ redis_host }}'
+Environment='POSTGRESQL_USER={{ postgres_user }}'
+Environment='POSTGRESQL_PASSWORD={{ postgresql_password }}'
+Environment='POSTGRESQL_HOST={{ postgres_host }}'
+Environment='POSTGRESQL_PORT={{ postgres_port }}'
+Environment='POSTGRESQL_DB={{ postgres_db }}'
+
+[Install]
+WantedBy=multi-user.target

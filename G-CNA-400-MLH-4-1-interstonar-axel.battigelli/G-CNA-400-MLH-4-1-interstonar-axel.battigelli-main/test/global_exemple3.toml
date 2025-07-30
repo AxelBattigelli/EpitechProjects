@@ -1,0 +1,15 @@
+[[bodies]]
+name = "Sun"
+position = {x = 1.81899E+8, y = 9.83630E+8, z = -1.58778E+8}
+direction = {x = 0, y = 0, z = 0}
+mass = 1000
+radius = 696_342_000
+
+[[bodies]]
+name = "Mercury"
+position = {x = 2.91899E+8, y = 9.83630E+8, z = -1.58778E+8}
+direction = {x = 0, y = 0, z = 0}
+mass = 1000
+radius = 696_342_000
+goal = true
+

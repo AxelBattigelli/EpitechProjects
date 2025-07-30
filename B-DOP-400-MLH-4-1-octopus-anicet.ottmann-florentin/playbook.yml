@@ -1,0 +1,41 @@
+---
+- hosts: all
+  roles:
+    - base
+
+- hosts: redis
+  become: yes
+  roles:
+    - redis
+
+- hosts: postgresql
+  become: yes
+  vars:
+    postgresql_flavor: pgdg
+    postgresql_version: 16
+  vars_files:
+    - group_vars/all.yml
+    - group_vars/vault.yml
+  roles:
+    - postgresql
+
+- hosts: poll
+  become: yes
+  roles:
+    - poll
+
+- hosts: worker
+  become: yes
+  roles:
+    - worker
+  vars_files:
+    - group_vars/all.yml
+    - group_vars/vault.yml
+
+- hosts: result
+  become: yes
+  roles:
+    - result
+  vars_files:
+    - group_vars/all.yml
+    - group_vars/vault.yml

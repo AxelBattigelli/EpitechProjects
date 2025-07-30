@@ -1,0 +1,115 @@
+> tick: 0
+input(s):
+  in_1: U
+  in_2: U
+output(s):
+  out: U
+> > > tick: 0
+input(s):
+  in_1: U
+  in_2: U
+output(s):
+  out: U
+> > > tick: 1
+input(s):
+  in_1: 1
+  in_2: 1
+output(s):
+  out: 1
+> > > tick: 1
+input(s):
+  in_1: 1
+  in_2: 1
+output(s):
+  out: 1
+> > > tick: 2
+input(s):
+  in_1: 1
+  in_2: 0
+output(s):
+  out: 1
+> > > tick: 2
+input(s):
+  in_1: 1
+  in_2: 0
+output(s):
+  out: 1
+> > > tick: 3
+input(s):
+  in_1: 0
+  in_2: 1
+output(s):
+  out: 1
+> > > tick: 3
+input(s):
+  in_1: 0
+  in_2: 1
+output(s):
+  out: 1
+> > > tick: 4
+input(s):
+  in_1: 0
+  in_2: 0
+output(s):
+  out: 0
+> > > tick: 4
+input(s):
+  in_1: 0
+  in_2: 0
+output(s):
+  out: 0
+> > > tick: 5
+input(s):
+  in_1: U
+  in_2: 0
+output(s):
+  out: U
+> > > tick: 5
+input(s):
+  in_1: U
+  in_2: 0
+output(s):
+  out: U
+> > > tick: 6
+input(s):
+  in_1: 0
+  in_2: U
+output(s):
+  out: U
+> > > tick: 6
+input(s):
+  in_1: 0
+  in_2: U
+output(s):
+  out: U
+> > > tick: 7
+input(s):
+  in_1: U
+  in_2: 1
+output(s):
+  out: 1
+> > > tick: 7
+input(s):
+  in_1: U
+  in_2: 1
+output(s):
+  out: 1
+> > > tick: 8
+input(s):
+  in_1: 1
+  in_2: U
+output(s):
+  out: 1
+> > > tick: 8
+input(s):
+  in_1: 1
+  in_2: U
+output(s):
+  out: 1
+> > > tick: 9
+input(s):
+  in_1: U
+  in_2: U
+output(s):
+  out: U
+> 

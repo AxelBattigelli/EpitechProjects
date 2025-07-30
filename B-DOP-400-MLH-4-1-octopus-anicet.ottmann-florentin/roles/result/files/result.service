@@ -1,0 +1,19 @@
+[Unit]
+Description=Result Node.js Web Client
+After=network.target
+
+[Service]
+User=result
+ExecStart=/usr/bin/node /opt/result/server.js
+WorkingDirectory=/opt/result
+Restart=always
+Environment=NODE_ENV=production
+Environment='PG_USER={{ postgres_user }}'
+Environment='PG_PASSWORD={{ postgresql_password }}'
+Environment='PG_HOST={{ postgres_host }}'
+Environment='PG_PORT={{ postgres_port }}'
+Environment='PG_DB={{ postgres_db }}'
+PIDFile=/var/run/result.pid
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,10 @@
+# Basic wire, direct link clock to output.
+#
+# CLOCK ---> OUTPUT
+
+.chipsets:
+output out
+clock cl
+
+.links:
+cl:1 out:1

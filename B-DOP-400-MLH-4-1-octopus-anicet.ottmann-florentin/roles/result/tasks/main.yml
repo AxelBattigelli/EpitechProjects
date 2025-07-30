@@ -1,0 +1,32 @@
+---
+
+- name: Install Node.js and npm
+  ansible.builtin.apt:
+    name:
+      - nodejs
+      - npm
+    state: present
+
+- name: Upload result Node.js service
+  ansible.builtin.unarchive:
+    src: result.tar
+    dest: /opt/
+
+- name: Create the result system user
+  user:
+    name: result
+    state: present
+    system: yes
+    shell: /bin/bash
+
+- name: Install service
+  ansible.builtin.template:
+    src: '../files/result.service'
+    dest: '/etc/systemd/system/result.service'
+    mode: '0644'
+
+- name: Start result service
+  ansible.builtin.service:
+    name: result
+    state: started
+    enabled: true

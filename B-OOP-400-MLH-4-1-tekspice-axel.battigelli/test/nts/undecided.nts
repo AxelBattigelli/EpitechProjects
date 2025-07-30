@@ -1,0 +1,12 @@
+# Basic wire, direct link true to output.
+#
+# TRUE ---> OUTPUT
+
+.chipsets:
+true true
+false false
+output out
+
+.links:
+true:1 out:1
+false:1 out:1

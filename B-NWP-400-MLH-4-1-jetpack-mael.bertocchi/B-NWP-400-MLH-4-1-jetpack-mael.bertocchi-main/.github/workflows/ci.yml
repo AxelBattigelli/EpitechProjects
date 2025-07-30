@@ -1,0 +1,44 @@
+##
+## EPITECH PROJECT, 2025
+## Jetpack
+## File description:
+## ci.yml
+##
+
+name: Build
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    name: Build
+    container:
+      image: epitechcontent/epitest-docker:latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Build Server
+        run: make server
+        timeout-minutes: 2
+
+      - name: Is server executable ?
+        run: if [ ! -x "jetpack_server" ]; then exit 1; fi
+
+      - name: Build Client
+        run: make client
+        timeout-minutes: 2
+
+      - name: Is client executable ?
+        run: if [ ! -x "jetpack_client" ]; then exit 1; fi
+
+      - name: Cleanup
+        run: make fclean

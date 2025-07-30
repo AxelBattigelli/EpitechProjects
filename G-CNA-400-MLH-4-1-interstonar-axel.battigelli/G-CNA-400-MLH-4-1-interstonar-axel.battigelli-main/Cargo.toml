@@ -1,0 +1,19 @@
+[dependencies]
+serde = {version = "1.0.219", features = ["derive"]}
+toml = "0.8.20"
+
+[lints.clippy]
+enum_glob_use = "deny"
+pedantic = "warn"
+nursery = "warn"
+unwrap_used = "deny"
+collection_is_never_read = "allow"
+
+[lints.rust]
+unsafe_op_in_unsafe_fn = "forbid"
+unsafe_code = "forbid"
+
+[package]
+name = "interstonar"
+version = "0.1.0"
+edition = "2021"

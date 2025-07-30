@@ -1,0 +1,6 @@
+.stack-work/
+*~
+wolfram
+wolfram.cabal
+test/coverage/
+coding-style-reports.log

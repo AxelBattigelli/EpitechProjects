@@ -1,0 +1,16 @@
+# The name of the application, uses to create application directory, e.g.
+# should be a shorthand, lowercase and not contain any whitespaces.
+app_name: poll
+
+# The user to run application.
+app_user: "ansible"
+
+# The directory to keep application source code.
+app_directory: "/home/{{ app_user }}/{{ app_name }}"
+
+# The path to application requirements.
+app_requirements: "{{ app_directory }}/requirements.txt"
+
+# The list of environment variables uses to run most of commands.
+app_environment:
+  PATH: "{{ app_directory }}/bin:{{ ansible_env.PATH }}"

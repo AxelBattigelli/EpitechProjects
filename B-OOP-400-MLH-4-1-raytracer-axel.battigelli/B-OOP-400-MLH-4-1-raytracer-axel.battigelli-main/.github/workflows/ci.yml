@@ -1,0 +1,79 @@
+##
+## EPITECH PROJECT, 2025
+## Raytracer
+## File description:
+## ci.yml
+##
+
+name: Build
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    name: Build
+    container:
+      image: epitechcontent/epitest-docker:latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Build
+        run: ./compile.sh
+        timeout-minutes: 3
+
+      - name: Is Raytracer executable ?
+        run: if [ ! -x "raytracer" ]; then exit 1; fi
+
+      - name: Is PPMViewer executable ?
+        run: if [ ! -x "PPMViewer" ]; then exit 1; fi
+
+      # - name: Run raytracer and display sorted output
+      #   run: |
+      #     for i in $(ls tests/cfg/test*.cfg | sort -V); do
+      #       echo "🔧 Running test: $i"
+      #       ./raytracer "$i" > /dev/null 2>&1
+      #       echo "📄 Contents of output.ppm for $i:"
+      #       cat output.ppm
+      #       echo "----------------------------------------"
+      #       rm -f output.ppm
+      #     done
+
+      - name: Install ImageMagick (for PPM to PNG conversion)
+        run: sudo apt-get update && sudo apt-get install -y imagemagick
+
+      - name: Run raytracer, convert output to PNG
+        run: |
+          mkdir -p images
+          for i in $(ls tests/cfg/test*.cfg | sort -V); do
+            echo "🔧 Running test: $i"
+            name=$(basename "$i" .cfg)
+            ./raytracer "$i" > /dev/null 2>&1
+            convert output.ppm "images/${name}.png"
+            echo "✅ Converted $i to images/${name}.png"
+            rm -f output.ppm
+          done
+
+      - name: Upload rendered PNGs as artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: raytracer-images
+          path: images/
+
+      - name: Add test output summary
+        run: |
+          echo "## 🖼️ Raytracer Render Outputs" >> $GITHUB_STEP_SUMMARY
+          for img in images/*.png; do
+            echo "- $(basename "$img") (included as artifact)" >> $GITHUB_STEP_SUMMARY
+          done
+
+      - name: Cleanup
+        run: rm -rf build/ && rm raytracer

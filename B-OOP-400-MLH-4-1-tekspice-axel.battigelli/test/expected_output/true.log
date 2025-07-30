@@ -1,0 +1,13 @@
+> > tick: 0
+input(s):
+output(s):
+  out: 1
+> tick: 0
+input(s):
+output(s):
+  out: 1
+> > > tick: 1
+input(s):
+output(s):
+  out: 1
+> 

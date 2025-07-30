@@ -1,0 +1,16 @@
+display
+cl=1
+display
+simulate
+
+display
+cl=0
+display
+simulate
+
+display
+cl=U
+display
+simulate
+
+display

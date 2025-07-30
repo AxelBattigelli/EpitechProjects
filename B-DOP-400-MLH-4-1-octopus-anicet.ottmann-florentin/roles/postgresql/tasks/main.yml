@@ -1,0 +1,86 @@
+---
+
+- name: APT keyrings directory
+  file:
+    path: "/etc/apt/keyrings"
+    state: directory
+    mode: "0755"
+
+- name: Install pgdg package signing key (Debian/pgdg)
+  get_url:
+    url: "https://www.postgresql.org/media/keys/ACCC4CF8.asc"
+    dest: "/etc/apt/keyrings/pgdg.asc"
+    mode: "0644"
+  register: __postgresql_apt_key_result
+  until: __postgresql_apt_key_result is succeeded
+  retries: 5
+  delay: 5
+
+- name: Install pgdg repository (Debian/pgdg)
+  apt_repository:
+    repo: "deb [signed-by=/etc/apt/keyrings/pgdg.asc] http://apt.postgresql.org/pub/repos/apt/ bookworm-pgdg main"
+    update_cache: true
+
+- name: Install PostgreSQL (Debian)
+  apt:
+    name: postgresql-16
+    state: latest
+  register: __postgresql_apt_result
+  until: __postgresql_apt_result is succeeded
+  retries: 5
+  delay: 5
+
+- name: Install psycopg2
+  apt:
+    name: "python3-psycopg2"
+    state: latest
+
+- name: Install pg_hba.conf
+  copy:
+    src: pg_hba.conf
+    dest: "/etc/postgresql/16/main/pg_hba.conf"
+    owner: "postgres"
+    group: "postgres"
+    mode: 0400
+  notify: Reload PostgreSQL
+
+- name: Ensure PostgreSQL is running
+  service:
+    name: "postgresql"
+    enabled: true
+    state: started
+
+- name: Create PostgreSQL user 'paul'
+  become_user: postgres
+  community.postgresql.postgresql_user:
+    name: "{{ postgres_user }}"
+    password: "{{ postgresql_password }}"
+    role_attr_flags: LOGIN
+    state: present
+
+- name: Create PostgreSQL database 'paul'
+  become_user: postgres
+  community.postgresql.postgresql_db:
+    name: "{{ postgres_db }}"
+    owner: "{{ postgres_user }}"
+    state: present
+
+- name: Ensure initial database schema
+  block:
+    - name: Schema definition file
+      copy:
+        src: schema.sql
+        dest: /var/lib/postgresql/initial_schema_definition.sql
+        owner: postgres
+        group: postgres
+        mode: 0600
+      register: initial_schema
+
+    - name: Apply the schema definition
+      become_user: postgres
+      community.postgresql.postgresql_script:
+        db: "{{ postgres_db }}"
+        path: /var/lib/postgresql/initial_schema_definition.sql
+        encoding: UTF-8
+      when: initial_schema.changed
+

@@ -1,0 +1,5 @@
+add_subdirectory(graphic_layer)
+add_subdirectory(ncurses)
+add_subdirectory(sdl2)
+add_subdirectory(sfml)
+# add_subdirectory(logger)

@@ -1,0 +1,4 @@
+Man nanotekspice
+	Run an electonic circuit on your cumputer
+Usage :
+	nanotekspice [FILE.nts]

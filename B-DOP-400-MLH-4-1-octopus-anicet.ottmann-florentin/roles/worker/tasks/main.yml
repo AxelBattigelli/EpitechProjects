@@ -1,0 +1,59 @@
+---
+
+- name: Install GnuPG
+  apt:
+    name: gnupg
+    state: present
+
+- name: Add GPG Adoptium key
+  ansible.builtin.apt_key:
+    url: https://packages.adoptium.net/artifactory/api/gpg/key/public
+    state: present
+
+- name: Add APT Adoptium repo
+  ansible.builtin.apt_repository:
+    repo: "deb https://packages.adoptium.net/artifactory/deb {{ ansible_distribution_release }} main"
+    state: present
+    filename: 'adoptium'
+
+- name: APT update cache
+  ansible.builtin.apt:
+    update_cache: yes
+
+- name: Install Temurin JDK 21
+  ansible.builtin.apt:
+    name: temurin-21-jdk
+    state: present
+
+- name: Install Maven
+  apt:
+    name: maven
+    state: present
+
+- name: Upload worker Java service
+  ansible.builtin.unarchive:
+    src: worker.tar
+    dest: /opt/
+
+- name: 'Build project'
+  shell: 'mvn -f /opt/worker/pom.xml dependency:resolve && mvn -f /opt/worker/pom.xml package'
+  args:
+    creates: /opt/worker/target/
+
+- name: Create the worker system user
+  user:
+    name: worker
+    state: present
+    system: yes
+    shell: /bin/bash
+
+- name: 'Install service'
+  template:
+    src: '../files/worker.service'
+    dest: '/etc/systemd/system/worker.service'
+    mode: '0644'
+
+- name: 'Start Worker'
+  service:
+    name: 'worker'
+    state: 'started'

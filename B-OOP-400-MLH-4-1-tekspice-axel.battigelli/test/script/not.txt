@@ -1,0 +1,16 @@
+display
+in=1
+display
+simulate
+
+display
+in=0
+display
+simulate
+
+display
+in=U
+display
+simulate
+
+display

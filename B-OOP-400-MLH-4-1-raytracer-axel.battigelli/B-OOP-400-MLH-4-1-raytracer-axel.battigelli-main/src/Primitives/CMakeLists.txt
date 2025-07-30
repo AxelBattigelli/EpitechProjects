@@ -1,0 +1,20 @@
+target_sources(raytracer PRIVATE
+    List.cpp
+    BVHNode.cpp
+    Sphere.cpp
+    SphereBuilder.cpp
+    Plane.cpp
+    PlaneBuilder.cpp
+    Boxe.cpp
+    BoxeBuilder.cpp
+    Cylinder.cpp
+    CylinderBuilder.cpp
+    Cone.cpp
+    ConeBuilder.cpp
+    Torus.cpp
+    TorusBuilder.cpp
+    Pyramide.cpp
+    PyramideBuilder.cpp
+    OBJFile.cpp
+    OBJFileBuilder.cpp
+)

@@ -1,0 +1,3 @@
+make -j8 tests_run
+gcovr --html-nested --output coverage.html
+firefox coverage.html 

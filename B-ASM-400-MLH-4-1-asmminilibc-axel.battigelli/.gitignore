@@ -1,0 +1,8 @@
+*.o
+libasm.so
+a.out
+
+*.c
+
+run.sh
+*.log

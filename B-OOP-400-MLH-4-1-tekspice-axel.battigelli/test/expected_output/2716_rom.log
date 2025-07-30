@@ -1,0 +1,553 @@
+> tick: 0
+input(s):
+  addr_00: U
+  addr_01: U
+  addr_02: U
+  addr_03: U
+  addr_04: U
+  addr_05: U
+  addr_06: U
+  addr_07: U
+  addr_08: U
+  addr_09: U
+  addr_10: U
+  enable: U
+  read: U
+output(s):
+  out_0: U
+  out_1: U
+  out_2: U
+  out_3: U
+  out_4: U
+  out_5: U
+  out_6: U
+  out_7: U
+> > > > > > > > > > > > > > tick: 0
+input(s):
+  addr_00: U
+  addr_01: U
+  addr_02: U
+  addr_03: U
+  addr_04: U
+  addr_05: U
+  addr_06: U
+  addr_07: U
+  addr_08: U
+  addr_09: U
+  addr_10: U
+  enable: U
+  read: U
+output(s):
+  out_0: U
+  out_1: U
+  out_2: U
+  out_3: U
+  out_4: U
+  out_5: U
+  out_6: U
+  out_7: U
+> > > tick: 1
+input(s):
+  addr_00: 0
+  addr_01: 0
+  addr_02: 0
+  addr_03: 0
+  addr_04: 0
+  addr_05: 0
+  addr_06: 0
+  addr_07: 0
+  addr_08: 0
+  addr_09: 0
+  addr_10: 0
+  enable: 0
+  read: 0
+output(s):
+  out_0: 0
+  out_1: 0
+  out_2: 0
+  out_3: 0
+  out_4: 1
+  out_5: 1
+  out_6: 0
+  out_7: 0
+> > tick: 1
+input(s):
+  addr_00: 0
+  addr_01: 0
+  addr_02: 0
+  addr_03: 0
+  addr_04: 0
+  addr_05: 0
+  addr_06: 0
+  addr_07: 0
+  addr_08: 0
+  addr_09: 0
+  addr_10: 0
+  enable: 0
+  read: 0
+output(s):
+  out_0: 0
+  out_1: 0
+  out_2: 0
+  out_3: 0
+  out_4: 1
+  out_5: 1
+  out_6: 0
+  out_7: 0
+> > > tick: 2
+input(s):
+  addr_00: 1
+  addr_01: 0
+  addr_02: 0
+  addr_03: 0
+  addr_04: 0
+  addr_05: 0
+  addr_06: 0
+  addr_07: 0
+  addr_08: 0
+  addr_09: 0
+  addr_10: 0
+  enable: 0
+  read: 0
+output(s):
+  out_0: 1
+  out_1: 0
+  out_2: 0
+  out_3: 0
+  out_4: 1
+  out_5: 1
+  out_6: 0
+  out_7: 0
+> > > tick: 2
+input(s):
+  addr_00: 1
+  addr_01: 0
+  addr_02: 0
+  addr_03: 0
+  addr_04: 0
+  addr_05: 0
+  addr_06: 0
+  addr_07: 0
+  addr_08: 0
+  addr_09: 0
+  addr_10: 0
+  enable: 0
+  read: 0
+output(s):
+  out_0: 1
+  out_1: 0
+  out_2: 0
+  out_3: 0
+  out_4: 1
+  out_5: 1
+  out_6: 0
+  out_7: 0
+> > > tick: 3
+input(s):
+  addr_00: 0
+  addr_01: 0
+  addr_02: 0
+  addr_03: 0
+  addr_04: 0
+  addr_05: 0
+  addr_06: 1
+  addr_07: 0
+  addr_08: 0
+  addr_09: 0
+  addr_10: 0
+  enable: 0
+  read: 0
+output(s):
+  out_0: 0
+  out_1: 0
+  out_2: 1
+  out_3: 0
+  out_4: 1
+  out_5: 1
+  out_6: 0
+  out_7: 0
+> > > tick: 3
+input(s):
+  addr_00: 0
+  addr_01: 0
+  addr_02: 0
+  addr_03: 0
+  addr_04: 0
+  addr_05: 0
+  addr_06: 1
+  addr_07: 0
+  addr_08: 0
+  addr_09: 0
+  addr_10: 0
+  enable: 0
+  read: 0
+output(s):
+  out_0: 0
+  out_1: 0
+  out_2: 1
+  out_3: 0
+  out_4: 1
+  out_5: 1
+  out_6: 0
+  out_7: 0
+> > > tick: 4
+input(s):
+  addr_00: 0
+  addr_01: 0
+  addr_02: 0
+  addr_03: 0
+  addr_04: 0
+  addr_05: 1
+  addr_06: 1
+  addr_07: 0
+  addr_08: 0
+  addr_09: 0
+  addr_10: 0
+  enable: 0
+  read: 0
+output(s):
+  out_0: 0
+  out_1: 1
+  out_2: 1
+  out_3: 0
+  out_4: 1
+  out_5: 1
+  out_6: 0
+  out_7: 0
+> > tick: 4
+input(s):
+  addr_00: 0
+  addr_01: 0
+  addr_02: 0
+  addr_03: 0
+  addr_04: 0
+  addr_05: 1
+  addr_06: 1
+  addr_07: 0
+  addr_08: 0
+  addr_09: 0
+  addr_10: 0
+  enable: 0
+  read: 0
+output(s):
+  out_0: 0
+  out_1: 1
+  out_2: 1
+  out_3: 0
+  out_4: 1
+  out_5: 1
+  out_6: 0
+  out_7: 0
+> > > tick: 5
+input(s):
+  addr_00: 0
+  addr_01: 0
+  addr_02: 0
+  addr_03: 0
+  addr_04: 0
+  addr_05: 1
+  addr_06: 1
+  addr_07: 0
+  addr_08: 0
+  addr_09: 0
+  addr_10: 0
+  enable: 0
+  read: 1
+output(s):
+  out_0: U
+  out_1: U
+  out_2: U
+  out_3: U
+  out_4: U
+  out_5: U
+  out_6: U
+  out_7: U
+> > tick: 5
+input(s):
+  addr_00: 0
+  addr_01: 0
+  addr_02: 0
+  addr_03: 0
+  addr_04: 0
+  addr_05: 1
+  addr_06: 1
+  addr_07: 0
+  addr_08: 0
+  addr_09: 0
+  addr_10: 0
+  enable: 0
+  read: 1
+output(s):
+  out_0: U
+  out_1: U
+  out_2: U
+  out_3: U
+  out_4: U
+  out_5: U
+  out_6: U
+  out_7: U
+> > > tick: 6
+input(s):
+  addr_00: 0
+  addr_01: 0
+  addr_02: 0
+  addr_03: 0
+  addr_04: 0
+  addr_05: 1
+  addr_06: 1
+  addr_07: 0
+  addr_08: 0
+  addr_09: 0
+  addr_10: 0
+  enable: 0
+  read: 0
+output(s):
+  out_0: 0
+  out_1: 1
+  out_2: 1
+  out_3: 0
+  out_4: 1
+  out_5: 1
+  out_6: 0
+  out_7: 0
+> > tick: 6
+input(s):
+  addr_00: 0
+  addr_01: 0
+  addr_02: 0
+  addr_03: 0
+  addr_04: 0
+  addr_05: 1
+  addr_06: 1
+  addr_07: 0
+  addr_08: 0
+  addr_09: 0
+  addr_10: 0
+  enable: 0
+  read: 0
+output(s):
+  out_0: 0
+  out_1: 1
+  out_2: 1
+  out_3: 0
+  out_4: 1
+  out_5: 1
+  out_6: 0
+  out_7: 0
+> > > tick: 7
+input(s):
+  addr_00: 0
+  addr_01: 0
+  addr_02: 0
+  addr_03: 0
+  addr_04: 0
+  addr_05: 1
+  addr_06: 1
+  addr_07: 0
+  addr_08: 0
+  addr_09: 0
+  addr_10: 0
+  enable: 1
+  read: 0
+output(s):
+  out_0: U
+  out_1: U
+  out_2: U
+  out_3: U
+  out_4: U
+  out_5: U
+  out_6: U
+  out_7: U
+> > tick: 7
+input(s):
+  addr_00: 0
+  addr_01: 0
+  addr_02: 0
+  addr_03: 0
+  addr_04: 0
+  addr_05: 1
+  addr_06: 1
+  addr_07: 0
+  addr_08: 0
+  addr_09: 0
+  addr_10: 0
+  enable: 1
+  read: 0
+output(s):
+  out_0: U
+  out_1: U
+  out_2: U
+  out_3: U
+  out_4: U
+  out_5: U
+  out_6: U
+  out_7: U
+> > > tick: 8
+input(s):
+  addr_00: 0
+  addr_01: 0
+  addr_02: 0
+  addr_03: 0
+  addr_04: 0
+  addr_05: 1
+  addr_06: 1
+  addr_07: 0
+  addr_08: 0
+  addr_09: 0
+  addr_10: 0
+  enable: 0
+  read: 0
+output(s):
+  out_0: 0
+  out_1: 1
+  out_2: 1
+  out_3: 0
+  out_4: 1
+  out_5: 1
+  out_6: 0
+  out_7: 0
+> > > tick: 8
+input(s):
+  addr_00: 0
+  addr_01: 0
+  addr_02: 0
+  addr_03: 0
+  addr_04: 0
+  addr_05: 1
+  addr_06: 1
+  addr_07: 0
+  addr_08: 0
+  addr_09: 0
+  addr_10: 0
+  enable: 0
+  read: 0
+output(s):
+  out_0: 0
+  out_1: 1
+  out_2: 1
+  out_3: 0
+  out_4: 1
+  out_5: 1
+  out_6: 0
+  out_7: 0
+> > > tick: 9
+input(s):
+  addr_00: 0
+  addr_01: 0
+  addr_02: 0
+  addr_03: 0
+  addr_04: 0
+  addr_05: 1
+  addr_06: 1
+  addr_07: 0
+  addr_08: 0
+  addr_09: 0
+  addr_10: 0
+  enable: 1
+  read: 1
+output(s):
+  out_0: U
+  out_1: U
+  out_2: U
+  out_3: U
+  out_4: U
+  out_5: U
+  out_6: U
+  out_7: U
+> > > tick: 9
+input(s):
+  addr_00: 0
+  addr_01: 0
+  addr_02: 0
+  addr_03: 0
+  addr_04: 0
+  addr_05: 1
+  addr_06: 1
+  addr_07: 0
+  addr_08: 0
+  addr_09: 0
+  addr_10: 0
+  enable: 1
+  read: 1
+output(s):
+  out_0: U
+  out_1: U
+  out_2: U
+  out_3: U
+  out_4: U
+  out_5: U
+  out_6: U
+  out_7: U
+> > > tick: 10
+input(s):
+  addr_00: 0
+  addr_01: 0
+  addr_02: 0
+  addr_03: 0
+  addr_04: 0
+  addr_05: 1
+  addr_06: 1
+  addr_07: 0
+  addr_08: 0
+  addr_09: 0
+  addr_10: 0
+  enable: 0
+  read: 0
+output(s):
+  out_0: 0
+  out_1: 1
+  out_2: 1
+  out_3: 0
+  out_4: 1
+  out_5: 1
+  out_6: 0
+  out_7: 0
+> > > > > > > > > > > > tick: 10
+input(s):
+  addr_00: 0
+  addr_01: 0
+  addr_02: 0
+  addr_03: 0
+  addr_04: 0
+  addr_05: 1
+  addr_06: 1
+  addr_07: 0
+  addr_08: 0
+  addr_09: 0
+  addr_10: 0
+  enable: 0
+  read: 0
+output(s):
+  out_0: 0
+  out_1: 1
+  out_2: 1
+  out_3: 0
+  out_4: 1
+  out_5: 1
+  out_6: 0
+  out_7: 0
+> > > tick: 11
+input(s):
+  addr_00: 1
+  addr_01: 1
+  addr_02: 1
+  addr_03: 1
+  addr_04: 1
+  addr_05: 1
+  addr_06: 1
+  addr_07: 1
+  addr_08: 1
+  addr_09: 1
+  addr_10: 1
+  enable: 0
+  read: 0
+output(s):
+  out_0: 1
+  out_1: 1
+  out_2: 1
+  out_3: 0
+  out_4: 1
+  out_5: 1
+  out_6: 0
+  out_7: 0
+> 

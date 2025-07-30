@@ -1,0 +1,171 @@
+                        Jetpack Game Communication Protocol
+
+Status of This Memo
+
+   This document specifies an informational protocol for the Jetpack Game.
+   Distribution of this memo is unlimited.
+
+Abstract
+
+   This document describes the communication protocol between clients and
+   the server in the Jetpack Game. The protocol utilizes a simple
+   packet-based system for message exchange.
+
+Table of Contents
+
+   1. Introduction ......................................................
+   2. Architecture ......................................................
+   3. Communication Structure ...........................................
+      3.1. Packet Format ................................................
+      3.2. Packet Headers ...............................................
+      3.3. Packet Data ..................................................
+   4. Map Format ........................................................
+
+1. Introduction
+
+   The Jetpack Game requires a reliable communication protocol to manage
+   interactions between clients and the server. This document outlines the
+   structure and implementation details of this protocol.
+
+2. Architecture
+
+   The Jetpack Game project is divided into two main components: the client
+   and the server. Both components also share common code.
+
+3. Communication Structure
+
+   Communication between clients and the server is achieved through
+   structured packets. Each packet comprises specific fields to ensure
+   proper routing and data integrity.
+
+   Fields:
+
+   - Preamble: A fixed byte (0xAA) indicating the start of a packet.
+   - Address: Specifies the intended recipient.
+     - 0x00: The identifier associated to the server
+     - 0x01: The identifier associated to the client n°1
+     - 0x02: The identifier associated to the client n°2
+   - Packet Header: Indicates the type of data contained.
+   - Data: The payload, varying based on the Packet Header.
+   - Checksum: Validates the integrity of the packet.
+
+   Every packet must end with the CRLF sequence (0x0D 0x0A) to signify the end
+   of the packet. The server will ignore any packets that do not conform to
+   this structure.
+
+3.1. Packet Format
+
+   The packet structure is as follows:
+
+   +--------------+----------------+------------------+---------------+----------+----------+
+   | Preamble     | Sender Address | Receiver Address | Packet Header | Data     | Checksum |
+   +--------------+----------------+------------------+---------------+----------+----------+
+   | 0xAA         | 0x00-0x02      | 0x00-0x02        | Type ID       | Variable | 2 bytes  |
+   +--------------+----------------+------------------+---------------+----------+----------+
+
+   - Preamble: 1 byte, fixed value 0xAA.
+   - Sender Address: 1 byte, source identifier.
+   - Receiver Address: 1 byte, destination identifier.
+   - Packet Header: 1 byte, defines the data type.
+   - Data: Variable length, content depends on Packet Header.
+   - Checksum: 2 bytes, calculated over all preceding bytes.
+
+   Note: The '0x' prefix is not included in the actual byte sequence.
+
+3.2. Packet Headers
+
+   Defined Packet Header values:
+
+   - 0x00: Connection requested
+   - 0x01: Connection accepted
+   - 0x02: Connection rejected
+   - 0x03: Connection closed
+
+   - 0x10: The client want to play to the game
+   - 0x11: The client want to quit the game
+   - 0x12: Game start
+   - 0x13: Game finish
+
+   - 0x20: The map content
+   - 0x21: A coin has been collected
+
+   - 0x30: The action made by the player
+   - 0x31: The position of the player
+
+   - 0x50: Internal error (with the error code in the data)
+
+   - 0x90: [Reserved for future use]
+
+3.3 Packet Data
+
+   The data field varies based on the Packet Header. Here are some
+   examples:
+
+   - For Packet Header 0x00 (Connection requested):
+     - Data: None
+
+   - For Packet Header 0x01 (Connection accepted):
+     - Data: None
+
+   - For Packet Header 0x02 (Connection rejected):
+     - Data: Reason for rejection (e.g. "Server full")
+
+   - For Packet Header 0x03 (Connection closed):
+     - Data: None
+
+   - For Packet Header 0x10 (Client wants to play):
+     - Data: None
+
+   - For Packet Header 0x11 (Client wants to quit):
+     - Data: None
+
+   - For Packet Header 0x12 (Game start):
+     - Data: None
+
+   - For Packet Header 0x13 (Game finish):
+     - Data: Winner's identifier
+       - 0x00 Nobody win
+       - 0x01 Player 1 win
+       - 0x02 Player 2 win
+
+   - For Packet Header 0x20 (Map):
+     - Data: Map content data in a specific format (see section 4)
+
+   - For Packet Header 0x21 (Coin collected):
+     - Data: Coin position, and the number of coins hold by each player
+     - Format: "x y my_coins other_coins"
+
+   - For Packet Header 0x30 (Player action):
+     - Data: Action type, which can be one of the following:
+         - 0x00: None
+         - 0x01: Jump
+
+   - For Packet Header 0x31 (Player position):
+     - Data: Coordinates of each player
+     - Format: "x1 y1 x2 y2"
+       - x1, y1: My coordinates
+       - x2, y2: Other coordinates
+
+   - For Packet Header 0x50 (Internal error):
+     - Data: Error code
+       - 0x01: Game is already launch
+       - 0x02: Invalid checksum
+
+4. Map Format
+
+   The map format is a 2D array of characters, where each character
+   represents a specific tile type. The map is defined in a separate file
+   and loaded by the server at startup.
+
+   The map as a height of 10 tiles (each tile has an height of 72 pixels and a
+   width of 45 pixels). Here is the different tile types:
+
+   - '_': Empty space
+   - 'e': Zapper
+   - 'c': Coin
+
+Author's Address
+
+   Maël Bertocchi - mael.bertocchi@epitech.eu - Epitech
+   Enzo Lorenzini - enzo.lorenzini@epitech.eu - Epitech
+   Axel Batigelli - axel.batigelli@epitech.eu - Epitech

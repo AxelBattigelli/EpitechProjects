@@ -1,0 +1,67 @@
+jenkins:
+  authorizationStrategy:
+    roleBased:
+      roles:
+        global:
+          - name: admin
+            entries:
+              - user: chocolateen
+            permissions:
+              - "Overall/Administer"
+            description: "Marvin master"
+          - name: ape
+            entries:
+              - user: i_dont_know
+            permissions:
+              - "Job/Build"
+              - "Job/Read"
+              - "Job/Workspace"
+              - "Overall/Read"
+            description: "Pedagogical team member"
+          - name: gorilla
+            entries:
+              - user: vaugie_g
+            permissions:
+              - "Job/Build"
+              - "Job/Cancel"
+              - "Job/Configure"
+              - "Job/Create"
+              - "Job/Delete"
+              - "Job/Move"
+              - "Job/Read"
+              - "Job/Workspace"
+              - "Overall/Read"
+            description: "Group Obsessively Researching Innovation Linked to Learning and Accomplishment"
+          - name: assist
+            entries:
+              - user: nasso
+            permissions:
+              - "Job/Read"
+              - "Job/Workspace"
+              - "Overall/Read"
+            description: "Assistant"
+  securityRealm:
+    local:
+      allowsSignup: false
+      users:
+        - id: chocolateen
+          name: "Hugo"
+          password: "${USER_CHOCOLATEEN_PASSWORD}"
+        - id: vaugie_g
+          name: "Garance"
+          password: "${USER_VAUGIE_G_PASSWORD}"
+        - id: i_dont_know
+          name: "Jeremy"
+          password: "${USER_I_DONT_KNOW_PASSWORD}"
+        - id: nasso
+          name: "Nassim"
+          password: "${USER_NASSO_PASSWORD}"
+  systemMessage: Welcome to the Chocolatine-Powered Marvin Jenkins Instance.
+
+security:
+  scriptApproval:
+    approvedScriptHashes:
+      - "SHA512:dad7111ebd34b868cb50c2653342afe41caa7e976d3269dcb14d14f2dac8aeba38295b23b1a8ab15d36bb988fb32a5480594719182ef7e8e540be56dbe03713b"
+
+jobs:
+  - file: ${JENKINS_HOME}/job_dsl.groovy

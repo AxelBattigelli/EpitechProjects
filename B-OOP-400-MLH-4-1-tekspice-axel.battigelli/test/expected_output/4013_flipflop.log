@@ -1,0 +1,196 @@
+> tick: 0
+input(s):
+  cl_1_clock: U
+  cl_2_clock: U
+  in_1_data: U
+  in_1_reset: U
+  in_1_set: U
+  in_2_data: U
+  in_2_reset: U
+  in_2_set: U
+output(s):
+  out_1_q: U
+  out_1_qb: 0
+  out_2_q: U
+  out_2_qb: 0
+> > > > > > > > > tick: 0
+input(s):
+  cl_1_clock: U
+  cl_2_clock: U
+  in_1_data: U
+  in_1_reset: U
+  in_1_set: U
+  in_2_data: U
+  in_2_reset: U
+  in_2_set: U
+output(s):
+  out_1_q: U
+  out_1_qb: 0
+  out_2_q: U
+  out_2_qb: 0
+> > > tick: 1
+input(s):
+  cl_1_clock: 0
+  cl_2_clock: 0
+  in_1_data: 0
+  in_1_reset: 0
+  in_1_set: 0
+  in_2_data: 0
+  in_2_reset: 0
+  in_2_set: 0
+output(s):
+  out_1_q: U
+  out_1_qb: 0
+  out_2_q: U
+  out_2_qb: 0
+> > > > tick: 1
+input(s):
+  cl_1_clock: 0
+  cl_2_clock: 0
+  in_1_data: 0
+  in_1_reset: 0
+  in_1_set: 0
+  in_2_data: 0
+  in_2_reset: 0
+  in_2_set: 0
+output(s):
+  out_1_q: U
+  out_1_qb: 0
+  out_2_q: U
+  out_2_qb: 0
+> > > tick: 2
+input(s):
+  cl_1_clock: 1
+  cl_2_clock: 1
+  in_1_data: 1
+  in_1_reset: 0
+  in_1_set: 0
+  in_2_data: 0
+  in_2_reset: 0
+  in_2_set: 0
+output(s):
+  out_1_q: 1
+  out_1_qb: 0
+  out_2_q: 0
+  out_2_qb: 1
+> > > > tick: 2
+input(s):
+  cl_1_clock: 1
+  cl_2_clock: 1
+  in_1_data: 1
+  in_1_reset: 0
+  in_1_set: 0
+  in_2_data: 0
+  in_2_reset: 0
+  in_2_set: 0
+output(s):
+  out_1_q: 1
+  out_1_qb: 0
+  out_2_q: 0
+  out_2_qb: 1
+> > > tick: 3
+input(s):
+  cl_1_clock: 0
+  cl_2_clock: 0
+  in_1_data: 0
+  in_1_reset: 0
+  in_1_set: 0
+  in_2_data: 0
+  in_2_reset: 0
+  in_2_set: 0
+output(s):
+  out_1_q: 1
+  out_1_qb: 0
+  out_2_q: 0
+  out_2_qb: 1
+> > > > tick: 3
+input(s):
+  cl_1_clock: 0
+  cl_2_clock: 0
+  in_1_data: 0
+  in_1_reset: 0
+  in_1_set: 0
+  in_2_data: 0
+  in_2_reset: 0
+  in_2_set: 0
+output(s):
+  out_1_q: 1
+  out_1_qb: 0
+  out_2_q: 0
+  out_2_qb: 1
+> > > tick: 4
+input(s):
+  cl_1_clock: 1
+  cl_2_clock: 1
+  in_1_data: 1
+  in_1_reset: 0
+  in_1_set: 0
+  in_2_data: 0
+  in_2_reset: 0
+  in_2_set: 0
+output(s):
+  out_1_q: 1
+  out_1_qb: 0
+  out_2_q: 0
+  out_2_qb: 1
+> > > > tick: 4
+input(s):
+  cl_1_clock: 1
+  cl_2_clock: 1
+  in_1_data: 1
+  in_1_reset: 0
+  in_1_set: 0
+  in_2_data: 0
+  in_2_reset: 0
+  in_2_set: 0
+output(s):
+  out_1_q: 1
+  out_1_qb: 0
+  out_2_q: 0
+  out_2_qb: 1
+> > > tick: 5
+input(s):
+  cl_1_clock: 0
+  cl_2_clock: 0
+  in_1_data: 1
+  in_1_reset: 0
+  in_1_set: 0
+  in_2_data: 0
+  in_2_reset: 0
+  in_2_set: 0
+output(s):
+  out_1_q: 1
+  out_1_qb: 0
+  out_2_q: 0
+  out_2_qb: 1
+> > > > tick: 5
+input(s):
+  cl_1_clock: 0
+  cl_2_clock: 0
+  in_1_data: 1
+  in_1_reset: 0
+  in_1_set: 0
+  in_2_data: 0
+  in_2_reset: 0
+  in_2_set: 0
+output(s):
+  out_1_q: 1
+  out_1_qb: 0
+  out_2_q: 0
+  out_2_qb: 1
+> > > tick: 6
+input(s):
+  cl_1_clock: 1
+  cl_2_clock: 1
+  in_1_data: 0
+  in_1_reset: 0
+  in_1_set: 0
+  in_2_data: 0
+  in_2_reset: 0
+  in_2_set: 0
+output(s):
+  out_1_q: 0
+  out_1_qb: 1
+  out_2_q: 0
+  out_2_qb: 1
+> 

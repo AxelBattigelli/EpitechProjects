@@ -1,0 +1,6 @@
+.stack-work/
+*~
+imageCompressor
+imageCompressor.cabal
+test/coverage/
+coding-style-reports.log

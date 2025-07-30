@@ -1,0 +1,161 @@
+##
+## EPITECH PROJECT, 2025
+## myPandoc
+## File description:
+## ci.yml
+##
+
+name: Build
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+env:
+  STACK_ROOT: /tmp/stack
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    name: Build
+    container:
+      image: epitechcontent/epitest-docker:latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install Stack and dependencies
+        run: |
+          mkdir -p $STACK_ROOT
+          stack setup --allow-different-user
+
+      - name: Build Pandoc
+        run: make
+        timeout-minutes: 2
+
+      - name: Is pandoc executable ?
+        run: if [ ! -x "mypandoc" ]; then exit 1; fi
+
+      - name: Cleanup
+        run: make fclean
+
+      - name: Unit Test Pandoc
+        run: stack test --coverage --allow-different-user || exit 1
+
+      - name: Run functional tests
+        run: |
+          make
+          mkdir -p tmp_output
+          touch test_results.txt
+
+          # XML to ... Test
+          echo "### XML to JSON ###" | tee -a test_results.txt
+          ./mypandoc -i "test/resources/syntaxe.xml" -f json > tmp_output/output.json || (echo "❌ Executable Failed" | tee -a test_results.txt; exit 1)
+          if ! diff tmp_output/output.json test/resources/syntaxe.json > tmp_output/x; then 
+            tee -a test_results.txt <tmp_output/x
+            echo "❌ XML to JSON failed" | tee -a test_results.txt 
+            exit 1
+          fi
+          tee -a test_results.txt <tmp_output/x
+          echo "### XML to MD ###" | tee -a test_results.txt
+          ./mypandoc -i "test/resources/syntaxe.xml" -f markdown > tmp_output/output.md || (echo "❌ Executable Failed" | tee -a test_results.txt; exit 1)
+          if ! diff tmp_output/output.md test/resources/syntaxe.md > tmp_output/x; then 
+            tee -a test_results.txt <tmp_output/x
+            echo "❌ XML to MD failed" | tee -a test_results.txt 
+            exit 1
+          fi
+          tee -a test_results.txt <tmp_output/x
+          echo "### XML to YML ###" | tee -a test_results.txt
+          ./mypandoc -i "test/resources/syntaxe.xml" -f yaml > tmp_output/output.yaml || (echo "❌ Executable Failed" | tee -a test_results.txt; exit 1)
+          if ! diff tmp_output/output.yaml test/resources/syntaxe.yaml > tmp_output/x; then 
+            tee -a test_results.txt <tmp_output/x
+            echo "❌ XML to YML failed" | tee -a test_results.txt
+            exit 1
+          fi
+          tee -a test_results.txt <tmp_output/x
+          echo "### XML to HTML ###" | tee -a test_results.txt
+          ./mypandoc -i "test/resources/syntaxe.xml" -f html > tmp_output/output.html || (echo "❌ Executable Failed" | tee -a test_results.txt; exit 1)
+          if ! diff tmp_output/output.html test/resources/syntaxe.html > tmp_output/x; then 
+            tee -a test_results.txt <tmp_output/x
+            echo "❌ XML to HTML failed" | tee -a test_results.txt 
+            exit 1
+          fi
+          tee -a test_results.txt <tmp_output/x
+
+          # MD to ... Test
+          echo "### MD to JSON ###" | tee -a test_results.txt
+          ./mypandoc -i "test/resources/syntaxe.md" -f json > tmp_output/output.json || (echo "❌ Executable Failed" | tee -a test_results.txt; exit 1)
+          if ! diff tmp_output/output.json test/resources/syntaxe.json > tmp_output/x; then 
+            tee -a test_results.txt <tmp_output/x
+            echo "❌ MD to JSON failed" | tee -a test_results.txt 
+            exit 1
+          fi
+          tee -a test_results.txt <tmp_output/x
+          echo "### MD to XML ###" | tee -a test_results.txt
+          ./mypandoc -i "test/resources/syntaxe.md" -f json > tmp_output/output.json || (echo "❌ Executable Failed" | tee -a test_results.txt; exit 1)
+          if ! diff tmp_output/output.json test/resources/syntaxe.json > tmp_output/x; then 
+            tee -a test_results.txt <tmp_output/x
+            echo "❌ MD to XML failed" | tee -a test_results.txt 
+            exit 1
+          fi
+          tee -a test_results.txt <tmp_output/x
+          echo "### MD to YML ###" | tee -a test_results.txt
+          ./mypandoc -i "test/resources/syntaxe.md" -f yaml > tmp_output/output.yaml || (echo "❌ Executable Failed" | tee -a test_results.txt; exit 1)
+          if ! diff tmp_output/output.yaml test/resources/syntaxe.yaml > tmp_output/x; then 
+            tee -a test_results.txt <tmp_output/x
+            echo "❌ MD to YML failed" | tee -a test_results.txt 
+            exit 1
+          fi
+          tee -a test_results.txt <tmp_output/x
+          echo "### MD to HTML ###" | tee -a test_results.txt
+          ./mypandoc -i "test/resources/syntaxe.md" -f html > tmp_output/output.html || (echo "❌ Executable Failed" | tee -a test_results.txt; exit 1)
+          if ! diff tmp_output/output.html test/resources/syntaxe.html > tmp_output/x; then 
+            tee -a test_results.txt <tmp_output/x
+            echo "❌ MD to HTML failed" | tee -a test_results.txt 
+            exit 1
+          fi
+          tee -a test_results.txt <tmp_output/x
+
+          # JSON to ... Test
+          echo "### JSON to MD ###" | tee -a test_results.txt
+          ./mypandoc -i "test/resources/syntaxe.json" -f markdown > tmp_output/output.md || (echo "❌ Executable Failed" | tee -a test_results.txt; exit 1)
+          if ! diff tmp_output/output.md test/resources/syntaxe.md > tmp_output/x; then 
+            tee -a test_results.txt <tmp_output/x
+            echo "❌ JSON to MD failed" | tee -a test_results.txt 
+            exit 1
+          fi
+          tee -a test_results.txt <tmp_output/x
+          echo "### JSON to XML ###" | tee -a test_results.txt
+          ./mypandoc -i "test/resources/syntaxe.json" -f xml > tmp_output/output.xml || (echo "❌ Executable Failed" | tee -a test_results.txt; exit 1)
+          if ! diff tmp_output/output.xml test/resources/syntaxe.xml > tmp_output/x; then 
+            tee -a test_results.txt <tmp_output/x
+            echo "❌ JSON to XML failed" | tee -a test_results.txt 
+            exit 1
+          fi
+          tee -a test_results.txt <tmp_output/x
+          echo "### JSON to YML ###" | tee -a test_results.txt
+          ./mypandoc -i "test/resources/syntaxe.json" -f yaml > tmp_output/output.yaml || (echo "❌ Executable Failed" | tee -a test_results.txt; exit 1)
+          if ! diff tmp_output/output.yaml test/resources/syntaxe.yaml > tmp_output/x; then 
+            tee -a test_results.txt <tmp_output/x
+            echo "❌ JSON to YML failed" | tee -a test_results.txt 
+            exit 1
+          fi
+          tee -a test_results.txt <tmp_output/x
+          echo "### JSON to HTML ###" | tee -a test_results.txt
+          if ! diff tmp_output/output.html test/resources/syntaxe.html > tmp_output/x; then 
+            ./mypandoc -i "test/resources/syntaxe.json" -f html > tmp_output/output.html || (echo "❌ Executable Failed" | tee -a test_results.txt; exit 1)
+            tee -a test_results.txt <tmp_output/x
+            echo "❌ JSON to HTML failed" | tee -a test_results.txt 
+            exit 1
+          fi
+          tee -a test_results.txt <tmp_output/x
+
+      - name: Display Test Results
+        run: |
+          echo "### Tests Results ###\n"
+          cat test_results.txt

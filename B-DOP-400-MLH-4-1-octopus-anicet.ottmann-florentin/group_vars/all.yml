@@ -1,0 +1,7 @@
+redis_host: redis-1
+redis_password: "{{ vault_redis_password }}"
+postgres_host: postgresql-1
+postgres_user: paul
+postgresql_password: "{{ vault_postgres_password }}"
+postgres_db: paul
+postgres_port: 5432

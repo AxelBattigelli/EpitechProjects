@@ -1,0 +1,34 @@
+---
+- name: Install packages required for python development
+  apt: 
+    name: python3-virtualenv
+    state: present
+  become: true
+
+- name: Install the latest pip version
+  pip: 
+    name: pip 
+    extra_args: '-U'
+    virtualenv: "{{ app_directory }}/env"
+
+- name: Checkout the latest source code
+  ansible.builtin.unarchive:
+    src: poll.tar
+    dest: "{{ app_directory }}/../"
+
+- name: Install application dependencies into virtualenv
+  pip:
+    requirements={{ app_requirements }}
+    virtualenv={{ app_directory }}
+    state=present
+
+- name: 'Install service'
+  template:
+    src: '../files/poll.service'
+    dest: '/etc/systemd/system/poll.service'
+    mode: '0644'
+
+- name: 'Start Poll'
+  service:
+    name: 'poll'
+    state: 'started'

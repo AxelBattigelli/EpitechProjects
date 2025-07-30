@@ -1,0 +1,10 @@
+display
+in_1=0
+simulate
+display
+in_1=1
+simulate
+display
+in_1=0
+simulate
+display
